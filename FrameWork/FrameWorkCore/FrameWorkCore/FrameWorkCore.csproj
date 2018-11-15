@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\App.cs" />
+    <Compile Include="Core\Manager\NumberFactory.cs" />
+    <Compile Include="Core\Manager\RandomValue.cs" />
     <Compile Include="Core\Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
