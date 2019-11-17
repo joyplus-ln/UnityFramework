@@ -1,0 +1,17 @@
+﻿////////////////////////////////////////////////////////////////////////////////
+//  
+// @module Quick Save for Unity3D 
+// @author Michael Clayton
+// @support clayton.inds+support@gmail.com 
+//
+////////////////////////////////////////////////////////////////////////////////
+
+namespace FastFrameWork
+{
+    public enum SecurityMode
+    {
+        None,
+        Aes,
+        Base64
+    }
+}
