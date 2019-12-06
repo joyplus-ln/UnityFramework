@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
-public class EditorTool :MonoBehaviour
+public class EditorTool : MonoBehaviour
 {
     public static Type GetType(string typeName)
     {
@@ -35,7 +35,6 @@ public class EditorTool :MonoBehaviour
             }
         }
         return listTmp.ToArray();
-
     }
 
     public static int GetAllEnumTypeIndex(string typeName)

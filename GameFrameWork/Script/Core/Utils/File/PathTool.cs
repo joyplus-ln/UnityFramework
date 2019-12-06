@@ -10,7 +10,7 @@ public class PathTool
         StringBuilder path = new StringBuilder();
         switch (loadType)
         {
-            case ResLoadLocation.Resources:
+            case ResLoadLocation.Resource:
 #if UNITY_EDITOR
                 path.Append(Application.dataPath);
                 path.Append("/Resources/");

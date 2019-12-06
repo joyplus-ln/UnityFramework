@@ -18,7 +18,7 @@ namespace FastBundle.Editor
         public Dictionary<string,BuildAddressablesData> GetBuilds()
         {
             Dictionary<string,BuildAddressablesData> buildAddressablesDatas = new Dictionary<string, BuildAddressablesData>();
-            const string rulesini = ConstPath.addreesablesAssetsRuletxt;
+            const string rulesini = FrameWorkConst.addreesablesAssetsRuletxt;
             if (File.Exists(rulesini))
             {
                 LoadRules(rulesini);
@@ -33,6 +33,9 @@ namespace FastBundle.Editor
                BuildAddressablesData group = new BuildAddressablesData();
                group.GroupName = item.GroupName;
                group.Lable = item.Lable;
+               group.ResType = item.resType;
+               group.packageType = item.packageType;
+               group.canUpdate = item.canUpdate;
                for (int i = 0; i < files.Count; i++)
                {
                    if (files[i].Contains('/'))
@@ -74,7 +77,10 @@ namespace FastBundle.Editor
                         var searchOption = s.ReadLine().Split('=')[1];
                         var GroupName = s.ReadLine().Split('=')[1];
                         var lable = s.ReadLine().Split('=')[1];
-                        var type = typeof(BuildRule).Assembly.GetType("FastBundle.Editor." + name);
+                        var restype = s.ReadLine().Split('=')[1];
+                        var PackageType = s.ReadLine().Split('=')[1];
+                        var canupdate = s.ReadLine().Split('=')[1];
+                        var type = typeof(AddressablesRules).Assembly.GetType("FastBundle.Editor." + name);
                         if (type != null)
                         {
                             AddressablesRuleData rule = Activator.CreateInstance(type) as AddressablesRuleData;
@@ -84,6 +90,9 @@ namespace FastBundle.Editor
                             rule.searchOption = (SearchOption)Enum.Parse(typeof(SearchOption), searchOption);
                             rule.GroupName = GroupName;
                             rule.Lable = lable.Split('|');
+                            rule.resType = restype;
+                            rule.packageType = PackageType;
+                            rule.canUpdate = bool.Parse(canupdate);
                             rules.Add(rule);
                         }
                     }
@@ -127,6 +136,9 @@ namespace FastBundle.Editor
         public SearchOption searchOption = SearchOption.AllDirectories;
         public string GroupName;
         public string[] Lable;
+        public string resType;
+        public string packageType;
+        public bool canUpdate;
 
         public AddressablesRuleData(){}
     }

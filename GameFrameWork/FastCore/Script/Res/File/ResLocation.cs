@@ -8,7 +8,7 @@ public class ResLocation
 }
 public enum ResLoadLocation
 {
-    Resources,
+    Resource,
     Develop,
     Streaming,
     Persistent,

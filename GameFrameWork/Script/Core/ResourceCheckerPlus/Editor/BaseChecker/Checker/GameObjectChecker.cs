@@ -22,7 +22,7 @@ namespace ResourceCheckerPlus
                 bool isStatic = go.isStatic;
                 StaticEditorFlags flag = GameObjectUtility.GetStaticEditorFlags(go);
                 bool batchStatic = (flag & StaticEditorFlags.BatchingStatic) == StaticEditorFlags.BatchingStatic;
-                bool lightmapStatic = (flag & StaticEditorFlags.LightmapStatic) == StaticEditorFlags.LightmapStatic;
+                bool lightmapStatic = (flag & StaticEditorFlags.ContributeGI) == StaticEditorFlags.ContributeGI;
                 bool navigationStatic = (flag & StaticEditorFlags.NavigationStatic) == StaticEditorFlags.NavigationStatic;
                 checkMap.Add(checker.goTag, go.tag);
                 checkMap.Add(checker.goLayer, LayerMask.LayerToName(go.layer));

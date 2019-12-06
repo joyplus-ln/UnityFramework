@@ -1,25 +1,23 @@
-﻿using UnityEngine;
+﻿using BetaFramework;
+using System;
 using System.Collections;
 using System.IO;
-using System;
 using System.Text;
-using System.Collections.Generic;
-using System.Net;
-using UnityEngine.Networking;
+using UnityEngine;
 
 /// <summary>
 /// 资源读取器，负责从不同路径读取资源
 /// </summary>
-public class ResourceIOTool :MonoBehaviour
+public class ResourceIOTool : MonoBehaviour
 {
-    static ResourceIOTool instance;
+    private static ResourceIOTool instance;
+
     public static ResourceIOTool GetInstance()
     {
         if (instance == null)
         {
             GameObject resourceIOTool = new GameObject();
             resourceIOTool.name = "ResourceIO";
-            DontDestroyOnLoad(resourceIOTool);
 
             instance = resourceIOTool.AddComponent<ResourceIOTool>();
         }
@@ -28,6 +26,7 @@ public class ResourceIOTool :MonoBehaviour
     }
 
     #region 读操作
+
     public static string ReadStringByFile(string path)
     {
         StringBuilder line = new StringBuilder();
@@ -53,13 +52,13 @@ public class ResourceIOTool :MonoBehaviour
         return line.ToString();
     }
 
-
+    
     public static string ReadStringByResource(string path)
     {
         path = FileTool.RemoveExpandName(path);
         TextAsset text = (TextAsset)Resources.Load(path);
 
-        if(text == null)
+        if (text == null)
         {
             return "";
         }
@@ -69,7 +68,7 @@ public class ResourceIOTool :MonoBehaviour
         }
     }
 
-    public static Texture2D ReadTextureByFile(string path,int width,int height)
+    public static Texture2D ReadTextureByFile(string path, int width, int height)
     {
         //创建文件读取流
         FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -124,7 +123,7 @@ public class ResourceIOTool :MonoBehaviour
     //    }
     //}
 
-    public static void ResourceLoadAsync(string path,LoadCallBack callback)
+    public static void ResourceLoadAsync(string path, LoadCallBack callback)
     {
         GetInstance().MonoLoadMethod(path, callback);
     }
@@ -134,15 +133,16 @@ public class ResourceIOTool :MonoBehaviour
         StartCoroutine(MonoLoadByResourcesAsync(path, callback));
     }
 
-    LoadState m_loadState = new LoadState(); 
+    private LoadState m_loadState = new LoadState();
+
     public IEnumerator MonoLoadByResourcesAsync(string path, LoadCallBack callback)
     {
         ResourceRequest status = Resources.LoadAsync(path);
-        
+
         while (!status.isDone)
         {
             m_loadState.UpdateProgress(status);
-            callback(m_loadState,null);
+            callback(m_loadState, null);
 
             yield return 0;
         }
@@ -224,12 +224,11 @@ public class ResourceIOTool :MonoBehaviour
 
     public IEnumerator MonoLoadByWWWAsync(string url, WWWLoadCallBack callback)
     {
-        UnityWebRequest www = new UnityWebRequest(url);
+        WWW www = new WWW(url);
         LoadState loadState = new LoadState();
 
         while (!www.isDone)
         {
-                     
             loadState.UpdateProgress(www);
             callback(loadState, www);
 
@@ -240,10 +239,12 @@ public class ResourceIOTool :MonoBehaviour
         callback(loadState, www);
     }
 
-    #endregion
+    #endregion 读操作
 
     #region 写操作
+
 #if !UNITY_WEBGL || UNITY_EDITOR
+
     //web Player 不支持写操作
     public static void WriteStringByFile(string path, string content)
     {
@@ -271,7 +272,6 @@ public class ResourceIOTool :MonoBehaviour
         }
     }
 
-
     public static void CreateFile(string path, byte[] byt)
     {
         try
@@ -287,33 +287,38 @@ public class ResourceIOTool :MonoBehaviour
 
 #endif
 
-    #endregion
-
+    #endregion 写操作
 }
 
 #region 回调声明
+
 public delegate void AssetBundleLoadCallBack(LoadState state, AssetBundle bundlle);
-public delegate void WWWLoadCallBack(LoadState loadState, UnityWebRequest www);
+
+public delegate void WWWLoadCallBack(LoadState loadState, WWW www);
+
 public delegate void LoadCallBack(LoadState loadState, object resObject);
+
 public class LoadState
 {
     private static LoadState completeState;
 
     public static LoadState CompleteState
     {
-        get {
+        get
+        {
             if (completeState == null)
             {
                 completeState = new LoadState();
                 completeState.isDone = true;
                 completeState.progress = 1;
             }
-            return completeState; 
+            return completeState;
         }
     }
 
     //public object asset;
     public bool isDone;
+
     public float progress;
 
     public void UpdateProgress(ResourceRequest resourceRequest)
@@ -327,13 +332,12 @@ public class LoadState
         isDone = assetBundleCreateRequest.isDone;
         progress = assetBundleCreateRequest.progress;
     }
-    
-    public void UpdateProgress(UnityWebRequest www)
+
+    public void UpdateProgress(WWW www)
     {
         isDone = www.isDone;
-        progress = www.uploadProgress;
+        progress = www.progress;
     }
-
 }
 
-#endregion
+#endregion 回调声明
