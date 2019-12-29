@@ -30,7 +30,7 @@ namespace FastBundle.Editor
 
         public static void BuildBundle()
         {
-            AddressablesBundleBuildScript.CreatConfig();
+            CreatConfig();
             AddressableAssetSettings.CleanPlayerContent();
             BuildCache.PurgeCache(false);
             AddressableAssetSettingsDefaultObject.Settings.ActivePlayerDataBuilderIndex = 3;

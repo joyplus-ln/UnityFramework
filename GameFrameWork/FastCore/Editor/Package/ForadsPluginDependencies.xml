@@ -1,0 +1,73 @@
+﻿<dependencies>
+  <androidPackages>
+
+   <androidPackage spec="androidx.recyclerview:recyclerview:1.0.0" />
+
+    <androidPackage spec="androidx.appcompat:appcompat:1.0.2" />
+    
+    <androidPackage spec="com.squareup.retrofit2:converter-gson:2.2.0" />
+    
+    <androidPackage spec="com.google.code.gson:gson:2.7" />
+
+    <androidPackage spec="com.google.android.gms:play-services-ads-identifier:16.0.0" />
+    <androidPackage spec="com.google.android.gms:play-services-ads:18.1.1" />
+    
+    <androidPackage spec="com.facebook.android:audience-network-sdk:5.5.0" />
+
+    <androidPackage spec="com.vungle:publisher-sdk-android:6.4.11" />
+
+    <androidPackage spec="com.applovin:applovin-sdk:9.6.2" />
+
+    <androidPackage spec="com.adcolony:sdk:4.1.0">
+      <repositories>
+        <repository>https://adcolony.bintray.com/AdColony</repository>
+      </repositories>
+    </androidPackage>
+    
+    <androidPackage spec="com.ironsource.sdk:mediationsdk:6.8.5@jar">
+      <repositories>
+        <repository>https://dl.bintray.com/ironsource-mobile/android-sdk</repository>
+      </repositories>
+    </androidPackage>
+
+  </androidPackages>
+
+  <iosPods>
+    <iosPod
+        name="Google-Mobile-Ads-SDK"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 7.50.0" />
+    <iosPod
+        name="FBAudienceNetwork"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 5.5.1" />
+    <iosPod
+        name="VungleSDK-iOS"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 6.4.5" />
+    <iosPod
+        name="AppLovinSDK"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 6.9.5" />
+    <iosPod
+        name="IronSourceSDK"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 6.8.7" />
+    <iosPod
+        name="UnityAds"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version="~> 3.3.0" />
+    <iosPod
+        name="AdColony"
+        bitcodeEnabled="true"
+        minTargetSdk="9.0"
+        version=" 4.1.1" />
+  </iosPods>
+
+</dependencies>

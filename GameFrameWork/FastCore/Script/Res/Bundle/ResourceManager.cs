@@ -36,4 +36,5 @@ public static class ResourceManager
     {
         return Addressables.LoadAssetAsync<T>(assetAddress).Result;
     }
+    
 }

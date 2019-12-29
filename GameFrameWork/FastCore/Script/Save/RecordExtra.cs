@@ -154,10 +154,7 @@ public class StringPrefData : PrefData<string>
 
     protected override void Set(string key, string val)
     {
-        if (val == null)
-            Record.DeleteKey(key);
-        else
-            Record.SetString(key, val);
+        Record.SetString(key, val);
     }
 }
 
@@ -174,10 +171,7 @@ public class ObjectPrefData<T> : PrefData<T> where T : new()
 
     protected override void Set(string key, T val)
     {
-        if (val == null)
-            Record.DeleteKey(key);
-        else
-            Record.SetObject(key, val);
+        Record.SetObject(key, val);
     }
 }
 

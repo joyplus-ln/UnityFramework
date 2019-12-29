@@ -19,26 +19,7 @@ namespace BetaFramework
 
         private static RecordTable<float> floatTable =
             new RecordTable<float>(RecordDelegateFun.GetFloat, RecordDelegateFun.SetFloat);
-
-        /// <summary>
-        /// 初始化方法，必须调用
-        /// </summary>
-        public static void Init()
-        {
-            stringTable.LoadCache();
-            intTable.LoadCache();
-            floatTable.LoadCache();
-        }
-
-        /// <summary>
-        /// 存储缓存key的方法，可以在相应节点<切换场景>调用，如果不调用就不能在初始化的时候缓存所有的数据
-        /// </summary>
-        public static void SaveCacheKey()
-        {
-            stringTable.SaveCacheKey();
-            intTable.SaveCacheKey();
-            floatTable.SaveCacheKey();
-        }
+        
 
         public static string GetString(string key, string defaultValue = "")
         {
@@ -123,36 +104,8 @@ namespace BetaFramework
                 }
             }
         }
+        
 
-        public static bool HasKey(string key)
-        {
-            if (stringTable.HasKey(key) || intTable.HasKey(key) || floatTable.HasKey(key))
-            {
-                return true;
-            }
-            else
-            {
-                if (PlayerPrefs.HasKey(key))
-                {
-                    //假如key没有被缓存  新项目不应该存在这种情况
-                    Debug.LogError("key wrong:" + key);
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        public static void DeleteKey(string key)
-        {
-            stringTable.DeleteKey(key);
-            intTable.DeleteKey(key);
-            floatTable.DeleteKey(key);
-            if (PlayerPrefs.HasKey(key))
-            {
-                PlayerPrefs.DeleteKey(key);
-            }
-        }
         
     }
 }
